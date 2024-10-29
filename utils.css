@@ -1,0 +1,71 @@
+.text-black{
+    color: var(--black);
+}
+
+.text-shadow{
+    color: var(--shadow);
+}
+
+.text-neutro{
+    color: var(--neutro);
+}
+
+.text-light{
+    color: var(--light);
+}
+
+.text-white{
+    color: var(--white);
+}
+
+.text-hl1{
+    color: var(--color-1);
+}
+
+.text-hl2{
+    color: var(--color-2);
+}
+
+.text-hl3{
+    color: var(--color-3);
+}
+
+.text-hl4{
+    color: var(--color-4);
+}
+
+.text-w100{
+    font-weight: 100;
+}
+
+.text-w200{
+    font-weight: 200;
+}
+
+.text-w300{
+    font-weight: 300;
+}
+
+.text-w400{
+    font-weight: 400;
+}
+
+.text-w500{
+    font-weight: 500;
+}
+
+.text-w600{
+    font-weight: 600;
+}
+
+.text-w700{
+    font-weight: 700;
+}
+
+.text-w800{
+    font-weight: 800;
+}
+
+.text-italic{
+    font-style: italic;
+}
