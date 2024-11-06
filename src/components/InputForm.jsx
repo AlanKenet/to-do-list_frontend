@@ -26,7 +26,14 @@ export default function InputForm () {
   }
   return (
     <form name='task'>
-      <input type='text' name='task' id='task' ref={inputRef} value={value} onChange={handleChange} />
+      <input
+        type='text'
+        name='task'
+        id='task'
+        ref={inputRef}
+        value={value}
+        onChange={handleChange}
+      />
       <ControlButton handleClick={handleClick}>Añadir</ControlButton>
     </form>
   )
