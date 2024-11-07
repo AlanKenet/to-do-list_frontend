@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 
 import App from '@/App'
 
-import TaskProvider from '@/contexts/TaskProvider'
+import TaskProvider from '@/components/TasksProvider'
 
 const rootElementDOM = document.getElementById('root')
 

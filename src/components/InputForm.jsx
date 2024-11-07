@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-import { useTasks } from '@/contexts/TaskProvider'
+import { useTasks } from '@/hooks/useTasks'
 
 import ControlButton from '@/components/ControlButton'
 
@@ -19,7 +19,7 @@ export default function InputForm () {
   const handleClick = (e) => {
     e.preventDefault()
     if (value) {
-      addTask(value)
+      addTask({ title: value })
       setValue('')
       inputRef.current.focus()
     }

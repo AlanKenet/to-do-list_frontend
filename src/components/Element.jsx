@@ -1,19 +1,19 @@
-import { useTasks } from '@/contexts/TaskProvider'
+import { useTasks } from '@/hooks/useTasks'
 
 import ControlButton from '@/components/ControlButton'
 
-export default function Element ({ children, id, complete }) {
+export default function Element ({ children, id, finished }) {
   const { setStatusTask, deleteTask } = useTasks()
 
   const handleStatus = () => {
-    setStatusTask(id)
+    setStatusTask({ id })
   }
 
   const handleExistence = () => {
-    deleteTask(id)
+    deleteTask({ id })
   }
 
-  const textDecorator = complete ? 'line-through' : 'none'
+  const textDecorator = finished ? 'line-through' : 'none'
 
   return (
     <li>

@@ -1,4 +1,4 @@
-import { useTasks } from '@/contexts/TaskProvider'
+import { useTasks } from '@/hooks/useTasks'
 
 import Element from '@/components/Element'
 
@@ -7,9 +7,9 @@ export default function List () {
   return (
     <ul>
       {
-        tasks.map(({ id, content, complete }) => (
-          <Element key={id} id={id} complete={complete}>
-            {content}
+        tasks.map(({ id, title, finished }) => (
+          <Element key={id} id={id} finished={finished}>
+            {title}
           </Element>
         ))
       }
