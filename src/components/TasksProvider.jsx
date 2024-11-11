@@ -1,18 +1,28 @@
 import { useEffect, useState } from 'react'
 
-import { TasksContext, getAllTasks, addTask, setStatusTask, deleteTask } from '@/contexts/TasksContext'
+import { TasksContext } from '@/contexts/TasksContext'
+
+import { TasksService } from '@/services/TasksService.js'
 
 export default function TasksProvider ({ children }) {
   const [tasks, setTasks] = useState([])
+  const [apiKey, setApiKey] = useState('j6lpB8495Kdl')
 
-  const handleGetAllTasks = async () => {
-    const tasks = await getAllTasks()
+  TasksService.apiKey = apiKey
+
+  const getAllTasks = async () => {
+    const response = await TasksService.index({ apiKey })
+
+    const tasks = response
+
+    console.log(tasks)
+
     if (tasks) {
       setTasks(tasks)
     }
   }
 
-  const handleAddTask = async ({ title }) => {
+  const addTask = async ({ title }) => {
     const response = await addTask({ title })
     if (response) {
       const tasks = await getAllTasks()
@@ -20,7 +30,7 @@ export default function TasksProvider ({ children }) {
     }
   }
 
-  const handleSetStatusTask = async ({ id }) => {
+  const setStatusTask = async ({ id }) => {
     const task = tasks.find(task => task.id === id)
     const response = await setStatusTask({ id, finished: !task.finished })
     if (response) {
@@ -29,7 +39,7 @@ export default function TasksProvider ({ children }) {
     }
   }
 
-  const handleDeleteTask = async ({ id }) => {
+  const deleteTask = async ({ id }) => {
     const response = await deleteTask({ id })
     if (response) {
       const tasks = await getAllTasks()
@@ -38,11 +48,11 @@ export default function TasksProvider ({ children }) {
   }
 
   useEffect(() => {
-    handleGetAllTasks()
+    getAllTasks()
   }, [])
 
   return (
-    <TasksContext.Provider value={{ tasks, getAllTasks: handleGetAllTasks, addTask: handleAddTask, setStatusTask: handleSetStatusTask, deleteTask: handleDeleteTask }}>
+    <TasksContext.Provider value={{ tasks, getAllTasks, addTask, setStatusTask, deleteTask }}>
       {children}
     </TasksContext.Provider>
   )
