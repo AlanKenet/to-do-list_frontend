@@ -5,9 +5,9 @@ import { useTasks } from '@/hooks/useTasks'
 import ControlButton from '@/components/ControlButton'
 
 export default function InputForm () {
-  const { addTask } = useTasks()
-  const inputRef = useRef()
   const [value, setValue] = useState('')
+  const inputRef = useRef()
+  const { addTask } = useTasks()
 
   const handleChange = (e) => {
     const { target } = e
