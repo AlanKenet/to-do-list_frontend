@@ -1,5 +1,5 @@
-export default function ControlButton ({ children, handleClick }) {
+export default function ControlButton ({ id, children, handleClick }) {
   return (
-    <button onClick={handleClick}>{children}</button>
+    <button id={id} onClick={handleClick}>{children}</button>
   )
 }
