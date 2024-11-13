@@ -1,9 +1,11 @@
 import LoginForm from '@/components/LoginForm'
 
+import '@/styles/Login.css'
+
 export default function Login () {
   return (
-    <section>
+    <div className='login'>
       <LoginForm />
-    </section>
+    </div>
   )
 }

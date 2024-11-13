@@ -1,17 +1,10 @@
-import InputForm from '@/components/InputForm'
-import List from '@/components/List'
-import Login from '@/components/Login'
-
-import '@/App.css'
+import IndexRouterProvider from '@/providers/IndexRouterProvider'
+import TaskProvider from '@/providers/TasksProvider'
 
 export default function App () {
   return (
-    <main className='app'>
-      <Login />
-      <div>
-        <InputForm />
-        <List />
-      </div>
-    </main>
+    <TaskProvider>
+      <IndexRouterProvider />
+    </TaskProvider>
   )
 }
