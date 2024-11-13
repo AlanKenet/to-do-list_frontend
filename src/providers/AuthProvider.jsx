@@ -9,7 +9,7 @@ import { useAuthState } from '@/hooks/useAuthState'
 
 export default function AuthProvider ({ children }) {
   const [currentUser, setCurrentUser] = useState(null)
-  const [auth, setAuth] = useAuthState({})
+  const [auth, setAuth] = useAuthState(null)
 
   async function login ({ username, password, code }) {
     const response = await AuthService.login({ username, password, code })
@@ -19,8 +19,12 @@ export default function AuthProvider ({ children }) {
     setAuth(token)
   }
 
-  function logout () {
-    setCurrentUser({})
+  async function logout () {
+    const response = await AuthService.logout()
+    if (response) {
+      setCurrentUser(null)
+      setAuth(null)
+    }
   }
 
   return (
