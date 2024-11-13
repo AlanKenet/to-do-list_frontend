@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 import ControlButton from '@/components/ControlButton'
-import { useTasks } from '@/hooks/useTasks'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function LoginForm () {
-  const [value, setValue] = useState('')
-  const { updateApiKey } = useTasks()
+  const [value, setValue] = useState('j6lpB8495Kdl')
+  const { loginWithCode } = useAuth()
 
   const handleChange = (e) => {
     const { target } = e

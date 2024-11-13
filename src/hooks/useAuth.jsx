@@ -1,24 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
 
-import { AuthService } from '@/services/AuthService'
+import { AuthContext } from '@/contexts/AuthContext'
 
-export function useAuth (initKey) {
-  const [apiKey, setApiKey] = useState(initKey)
-  const [auth, setAuth] = useState(null)
-
-  function updateAuth (apikey) {
-    const AuthServiceInstance = new AuthService({ apiKey })
-    setAuth(AuthServiceInstance)
-  }
-
-  useEffect(() => {
-    if (apiKey) {
-      updateAuth(apiKey)
-    }
-  }, [apiKey])
-
-  return [
-    auth,
-    setApiKey
-  ]
-}
+export const useAuth = () => useContext(AuthContext)

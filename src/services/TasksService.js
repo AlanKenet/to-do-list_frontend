@@ -11,10 +11,10 @@ export class TasksService {
     }
   }
 
-  static async index ({ authTasks }) {
+  static async index ({ auth }) {
     const url = this.endPoint
     try {
-      const headers = authTasks.getHeaders()
+      const headers = auth.getHeaders()
       const response = await ApiService.request({ url, headers, method: 'GET' })
       return response
     } catch (error) {
@@ -22,10 +22,10 @@ export class TasksService {
     }
   }
 
-  static async store ({ data, authTasks }) {
+  static async store ({ data, auth }) {
     const url = this.endPoint
     try {
-      const headers = authTasks.getHeaders()
+      const headers = auth.getHeaders()
       const response = await ApiService.request({ url, headers, data, method: 'POST' })
       return response
     } catch (error) {
@@ -33,10 +33,10 @@ export class TasksService {
     }
   }
 
-  static async update ({ id, data, authTasks }) {
+  static async update ({ id, data, auth }) {
     const url = `${this.endPoint}/${id}`
     try {
-      const headers = authTasks.getHeaders()
+      const headers = auth.getHeaders()
       const response = await ApiService.request({ url, headers, data, method: 'PATCH' })
       return response
     } catch (error) {
@@ -44,10 +44,10 @@ export class TasksService {
     }
   }
 
-  static async destroy ({ id, authTasks }) {
+  static async destroy ({ id, auth }) {
     const url = `${this.endPoint}/${id}`
     try {
-      const headers = authTasks.getHeaders()
+      const headers = auth.getHeaders()
       const response = await ApiService.request({ url, headers, method: 'DELETE' })
       return response
     } catch (error) {

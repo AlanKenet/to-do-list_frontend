@@ -2,34 +2,32 @@ import { useEffect, useState } from 'react'
 
 import { TasksContext } from '@/contexts/TasksContext'
 
-import { useAuth } from '@/hooks/useAuth'
-
 import { TasksService } from '@/services/TasksService.js'
+
+import { useAuth } from '@/hooks/useAuth'
 
 export default function TasksProvider ({ children }) {
   const [tasks, setTasks] = useState([])
-  const [authTasks, setAuthTasksKey] = useAuth('')
+  const { auth } = useAuth()
 
   useEffect(() => {
-    if (authTasks) {
+    if (auth) {
       getAllTasks()
     }
-  }, [authTasks])
+  }, [auth])
 
   async function getAllTasks () {
-    const response = await TasksService.index({ authTasks })
+    const response = await TasksService.index({ auth })
 
     if (response.tasks) {
       const newTasks = response.tasks
       setTasks(newTasks)
-    } else {
-      console.log(response.message)
     }
   }
 
   async function addTask ({ title }) {
     const data = { title }
-    const response = await TasksService.store({ data, authTasks })
+    const response = await TasksService.store({ data, auth })
 
     if (response) {
       const newTasks = [...tasks, response.task]
@@ -40,7 +38,7 @@ export default function TasksProvider ({ children }) {
   async function setStatusTask ({ id }) {
     const task = tasks.find(task => task.id === id)
     const data = { finished: !task.finished }
-    const response = await TasksService.update({ id, data, authTasks })
+    const response = await TasksService.update({ id, data, auth })
 
     if (response) {
       const newTasks = [...tasks]
@@ -50,7 +48,7 @@ export default function TasksProvider ({ children }) {
   }
 
   async function deleteTask ({ id }) {
-    const response = await TasksService.destroy({ id, authTasks })
+    const response = await TasksService.destroy({ id, auth })
     if (response) {
       const newTasks = [...tasks]
       newTasks.splice(tasks.findIndex(task => task.id === id), 1)
@@ -59,7 +57,7 @@ export default function TasksProvider ({ children }) {
   }
 
   return (
-    <TasksContext.Provider value={{ tasks, updateApiKey: setAuthTasksKey, getAllTasks, addTask, setStatusTask, deleteTask }}>
+    <TasksContext.Provider value={{ tasks, getAllTasks, addTask, setStatusTask, deleteTask }}>
       {children}
     </TasksContext.Provider>
   )
