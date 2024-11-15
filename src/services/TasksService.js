@@ -1,8 +1,7 @@
-import { API_URL } from '@/constants/API_URL'
 import { ApiService } from '@/services/ApiService'
 
 export class TasksService {
-  static endPoint = `${API_URL}/tasks`
+  static endPoint = `${import.meta.env.VITE_API_URL}/tasks`
 
   static _handleError (error) {
     return {
