@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import ControlButton from '@/components/ControlButton'
+
 import { useAuth } from '@/hooks/useAuth'
 
 export default function LoginForm () {
-  const [value, setValue] = useState('j6lpB8495Kdl')
-  const { loginWithCode } = useAuth()
+  const [value, setValue] = useState('')
+  const { login, auth } = useAuth()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { target } = e
@@ -14,20 +17,27 @@ export default function LoginForm () {
     setValue(value)
   }
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault()
     const { target } = e
     const { id } = target
 
     if (value && id === 'withPass') {
-      updateApiKey(value)
+      await login({ code: value })
       setValue('')
     }
     if (id === 'withInvitation') {
-      updateApiKey('guest')
+      await login({})
       setValue('')
     }
   }
+
+  useEffect(() => {
+    if (auth) {
+      console.log((auth))
+      navigate('/home')
+    }
+  }, [auth, navigate])
 
   return (
     <form name='login'>

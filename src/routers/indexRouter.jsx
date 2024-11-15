@@ -5,6 +5,7 @@ import Base from '@/layouts/Base'
 import NotFound from '@/views/NotFound'
 import Login from '@/views/Login'
 import Home from '@/views/Home'
+import PrivateRoute from '@/components/PrivateRoute'
 
 export const indexRouter = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ export const indexRouter = createBrowserRouter([
       },
       {
         path: 'home',
-        element: <Home />
+        element: (
+          <PrivateRoute redirectionRoute='/login'>
+            <Home />
+          </PrivateRoute>
+        )
       }
     ]
   }
