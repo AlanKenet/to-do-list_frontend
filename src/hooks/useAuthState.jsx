@@ -6,7 +6,7 @@ export function useAuthState (token) {
   const [currentToken, setCurrentToken] = useState(token)
   const [auth, setAuth] = useState(null)
 
-  function updateAuth (token) {
+  const updateAuth = (token) => {
     const AuthServiceInstance = new AuthService({ token })
     setAuth(AuthServiceInstance)
   }

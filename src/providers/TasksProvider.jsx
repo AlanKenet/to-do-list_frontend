@@ -16,7 +16,7 @@ export default function TasksProvider ({ children }) {
     }
   }, [auth])
 
-  async function getAllTasks () {
+  const getAllTasks = async () => {
     const response = await TasksService.index({ auth })
 
     if (response.tasks) {
@@ -25,7 +25,7 @@ export default function TasksProvider ({ children }) {
     }
   }
 
-  async function addTask ({ title }) {
+  const addTask = async ({ title }) => {
     const data = { title }
     const response = await TasksService.store({ data, auth })
 
@@ -35,7 +35,7 @@ export default function TasksProvider ({ children }) {
     }
   }
 
-  async function setStatusTask ({ id }) {
+  const setStatusTask = async ({ id }) => {
     const task = tasks.find(task => task.id === id)
     const data = { finished: !task.finished }
     const response = await TasksService.update({ id, data, auth })
@@ -47,7 +47,7 @@ export default function TasksProvider ({ children }) {
     }
   }
 
-  async function deleteTask ({ id }) {
+  const deleteTask = async ({ id }) => {
     const response = await TasksService.destroy({ id, auth })
     if (response) {
       const newTasks = [...tasks]

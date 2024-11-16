@@ -1,7 +1,5 @@
 import { useTasks } from '@/hooks/useTasks'
 
-import ControlButton from '@/components/ControlButton'
-
 export default function Element ({ children, id, finished }) {
   const { setStatusTask, deleteTask } = useTasks()
 
@@ -18,7 +16,7 @@ export default function Element ({ children, id, finished }) {
   return (
     <li>
       <span onClick={handleStatus} style={{ textDecoration: textDecorator }}>{children}</span>
-      <ControlButton handleClick={handleExistence}>❌</ControlButton>
+      <button onClick={handleExistence}>❌</button>
     </li>
   )
 }

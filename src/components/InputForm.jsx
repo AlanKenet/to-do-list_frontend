@@ -2,8 +2,6 @@ import { useRef, useState } from 'react'
 
 import { useTasks } from '@/hooks/useTasks'
 
-import ControlButton from '@/components/ControlButton'
-
 export default function InputForm () {
   const [value, setValue] = useState('')
   const inputRef = useRef()
@@ -34,7 +32,7 @@ export default function InputForm () {
         value={value}
         onChange={handleChange}
       />
-      <ControlButton handleClick={handleClick}>Añadir</ControlButton>
+      <button handleClick={handleClick}>Añadir</button>
     </form>
   )
 }
