@@ -11,8 +11,8 @@ export default function AuthProvider ({ children }) {
   const [currentUser, setCurrentUser] = useState(null)
   const [auth, setAuth] = useAuthState(null)
 
-  const login = async ({ username, password, code }) => {
-    const response = await AuthService.login({ username, password, code })
+  const login = async ({ username = null, password = null }) => {
+    const response = await AuthService.login({ username, password })
     const { user, token } = response.data
     const newUser = new UsersService({ ...user })
     setCurrentUser(newUser)

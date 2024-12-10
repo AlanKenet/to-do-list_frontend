@@ -1,25 +1,25 @@
 import { ApiService } from '@/services/ApiService'
 
 export class AuthService {
-  #token = {}
+  #token
 
   constructor ({ token }) {
     if (!token) {
       throw new Error('Token required')
     }
+    this.guest = (token?.accessToken === 'guest')
     this.#token = token
   }
 
-  static async login ({ username = null, password = null, code = null }) {
-    if (!(username || password || code)) {
-      return AuthService.getFakeLoginResponse()
+  static async login ({ username = null, password = null }) {
+    if (!(username || password)) {
+      return AuthService.getGuestLoginResponse()
     }
 
     const url = `${import.meta.env.VITE_API_URL}/auth/login`
     const data = {
       username,
-      password,
-      code
+      password
     }
     const headers = {
       'Content-Type': 'application/json',
@@ -59,16 +59,16 @@ export class AuthService {
     }
   }
 
-  static getFakeLoginResponse () {
+  static getGuestLoginResponse () {
     const data = {
       user: {
         id: 0,
-        name: 'Fake User',
-        username: 'Fake Username',
-        email: 'fake@fake.com'
+        name: 'Guest',
+        username: 'Guest',
+        email: 'guest@guest.com'
       },
       token: {
-        accessToken: import.meta.env.VITE_FAKE_ACCESS_TOKEN
+        accessToken: 'guest'
       }
     }
     return { data }
