@@ -1,15 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root{
-  --black-pure: black;
-  --black: #0A0A0A;
-  --shadow: #242424;
-  --neutro: #666666;
-  --light: #DBDBDB;
-  --white: #F5F5F5;
-  --white-pure: white;
+  --min-width-layout: 769px;
+  --max-width-layout: 1024px;
 
-  background-color: var(--white);
+  --white-pure: white;
+  --white: #F4F6F4;
+  --highlight: #E1E5E1;
+  --light: #7B8877;
+  --neutro: #677061;
+  --shadow: #52574C;
+  --deepshadow: #22231F;
+  --black: #030302;
+  --black-pure: black;
+
+  --white-blue: #e6fdf5;
+  --highlight-blue: #b4e2d0;
+  --light-blue: #92ccb7;
+  --blue:       #6AAB93;
+  --shadow-blue: #579B82;
+  --deepshadow-blue: #3E735E;
+  --black-blue: #08120e;
+
+  --white-orange: #feeae3;
+  --highlight-orange: #ff6f36;
+  --light-orange: #fa5d1f;
+  --orange: #f45111;
+  --shadow-orange: #dc490f;
+  --deepshadow-orange: #c0400e;
+  --black-orange: #0f0501;
+
+  --white-green: #ebffda;
+  --highlight-green: #8fac76;
+  --light-green: #82986f;
+  --green: #738365;
+  --shadow-green: #627154;
+  --deepshadow-green: #4e5d40;
+  --black-green: #0b0c0a;
 }
 
 html{
@@ -25,7 +52,22 @@ html{
 }
 
 body{
-  font-family: 'Nunito', serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 135%;
   color: var(--black);
+}
+
+#root{
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--deepshadow);
+}
+
+a{
+  text-decoration: none;
+  outline: none;
+  color: inherit;
 }

@@ -1,35 +1,48 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import ControlButton from '@/components/ControlButton'
-
 import { useAuth } from '@/hooks/useAuth'
 
 export default function LoginForm () {
-  const [value, setValue] = useState('')
+  const [values, setValues] = useState({
+    email: '',
+    password: ''
+  })
   const { login, auth } = useAuth()
   const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { target } = e
-    const { value } = target
+    const { name, value } = target
 
-    setValue(value)
+    const newValues = {
+      ...values,
+      [name]: value
+    }
+
+    setValues(newValues)
   }
 
-  const handleClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const { target } = e
-    const { id } = target
+    if (!Object.values(values).includes('')) {
+      try {
+        await login({ ...values })
+      } catch (error) {
+        handleError(error)
+      }
+    }
+  }
 
-    if (value && id === 'withPass') {
-      await login({ code: value })
-      setValue('')
+  const handleKeyDown = async (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      await handleSubmit(e)
     }
-    if (id === 'withInvitation') {
-      await login({})
-      setValue('')
-    }
+  }
+
+  const handleError = (error) => {
+    console.error(error)
   }
 
   useEffect(() => {
@@ -40,19 +53,36 @@ export default function LoginForm () {
   }, [auth, navigate])
 
   return (
-    <form name='login'>
+    <form name='signIn' onSubmit={handleSubmit}>
+      <h1>Login to Your Account</h1>
       <fieldset>
-        <label htmlFor='apiKey'>API key:</label>
         <input
-          type='password'
-          name='apiKey'
-          id='apiKey'
-          value={value}
+          id='signInEmailInput'
+          type='email'
+          name='email'
+          placeholder='Email'
+          autoComplete='off'
+          value={values.email}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          required
+        />
+        <input
+          id='signInPasswordInput'
+          type='password'
+          name='password'
+          placeholder='Password'
+          autoComplete='off'
+          value={values.password}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          required
         />
       </fieldset>
-      <ControlButton id='withInvitation' handleClick={handleClick}>Guest</ControlButton>
-      <ControlButton id='withPass' handleClick={handleClick}>Using my Key</ControlButton>
+      <a href='#'>Forgot your password?</a>
+      <div>
+        <button id='signInButton' type='button' onClick={handleSubmit}>SIGN IN</button>
+      </div>
     </form>
   )
 }

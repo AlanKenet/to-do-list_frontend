@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 
-import LoginForm from '@/components/LoginForm'
-import SideContentLogin from '@/components/SideContentLogin'
+import SignUpForm from '@/components/SignUpForm'
+import SideContentSignUp from '@/components/SideContentSignUp'
 
 import { useAuth } from '@/hooks/useAuth'
 
 import '@/styles/Login.css'
 
-export default function Login () {
+export default function SignUp () {
   const { login } = useAuth()
   const navigate = useNavigate()
 
@@ -17,8 +17,8 @@ export default function Login () {
     const { target } = e
     const { id } = target
 
-    if (id === 'signUpButton') {
-      navigate('/signup')
+    if (id === 'signInButton') {
+      navigate('/login')
     }
     await login({})
   }

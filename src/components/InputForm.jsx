@@ -32,7 +32,7 @@ export default function InputForm () {
         value={value}
         onChange={handleChange}
       />
-      <button handleClick={handleClick}>Añadir</button>
+      <button onClick={handleClick}>Añadir</button>
     </form>
   )
 }

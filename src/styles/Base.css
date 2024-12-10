@@ -1,8 +1,11 @@
 .base{
-  width: 100%;
-  height: 100dvh;
+  container: layout / size;
+  min-width: var(--min-width-layout);
+  max-width: var(--max-width-layout);
+  width: 70dvw;
+  aspect-ratio: 16/10;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--neutro);
+  background-color: var(--white);
 }
